@@ -1,5 +1,6 @@
 # Ex.No:1a  			Study of Socket Programming
-
+## NISHALINI R
+## 212224040222
 ## Aim: 
 To perform a study on Socket Programming
 ## Introduction:
@@ -53,6 +54,65 @@ Socket programming finds applications in various domains, including web developm
 4.	Networked Games: Online multiplayer games rely on socket programming to facilitate communication between game clients and servers.
 5.	RPC mechanisms: which allow processes to execute code on a remote server, often use socket programming for communication.
 
+##
+import socket
+from datetime import datetime
+
+s = socket.socket()
+s.bind(('localhost', 8000))  
+s.listen(5)
+print("Server is listening...")
+
+c, addr = s.accept()
+print("Client Address:", addr)
+
+now = datetime.now()
+c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
+ack = c.recv(1024).decode()
+if ack:
+    print("Client says:", ack)
+
+c.close()
+s.close()
+## server 
+```
+
+import socket
+from datetime import datetime
+
+s = socket.socket()
+s.bind(('localhost', 8000))  
+s.listen(5)
+print("Server is listening...")
+
+c, addr = s.accept()
+print("Client Address:", addr)
+
+now = datetime.now()
+c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
+ack = c.recv(1024).decode()
+if ack:
+    print("Client says:", ack)
+
+c.close()
+s.close()
+```
+## client
+```
+
+
+import socket
+
+s = socket.socket()
+s.connect(('localhost', 8000))
+print("Server says:", s.recv(1024).decode())
+s.send("Acknowledgement received from client".encode())
+
+s.close()
+```
+## output
+
+<img width="1815" height="1050" alt="Screenshot 2025-10-08 194902" src="https://github.com/user-attachments/assets/75acb572-61b4-4fa1-b02a-b9169654c361" />
 
 ## Result:
 Thus the study of Socket Programming Completed Successfully
